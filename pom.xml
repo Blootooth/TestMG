@@ -13,6 +13,7 @@
     <modules>
         <!-- Build Core modules -->
         <module>data-core</module>
+        <module>testmg</module>
     </modules>
 
 </project>
