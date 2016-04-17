@@ -12,6 +12,7 @@
 
     <modules>
         <!-- Build Core modules -->
+        <module>data-core</module>
     </modules>
 
 </project>
