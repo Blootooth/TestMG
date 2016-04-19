@@ -8,7 +8,7 @@ public class TestTestCase {
     TestCase testCase = new TestCase(1001, "Sample Summary", "Sample Description", "Sample PreConditions", "ACTIVE", 1);
 
     /**
-     * Adding this for the sake of coverage
+     * Adding these for the sake of coverage
      */
     @Test
     public void testTestCaseId() {
