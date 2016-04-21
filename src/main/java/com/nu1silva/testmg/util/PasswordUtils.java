@@ -16,4 +16,22 @@ public class PasswordUtils {
             return null;
         }
     }
+
+    public Boolean passwordVerification(String userId, String password) {
+        try {
+            passwordEncryptor.setAlgorithm("SHA-1");
+            passwordEncryptor.setPlainDigest(true);
+
+            // TODO - call method to get user current password (UserService)
+
+            if (passwordEncryptor.checkPassword(password, "")) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return false;
+        }
+    }
 }
