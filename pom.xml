@@ -1,20 +1,60 @@
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
+    <artifactId>testmg</artifactId>
     <groupId>com.nu1silva.testmg</groupId>
-    <artifactId>TestMG</artifactId>
     <version>0.0.1</version>
-    <packaging>pom</packaging>
-
-    <name>TestMG</name>
+    <packaging>war</packaging>
+    <name>testmg</name>
     <url>http://maven.apache.org</url>
 
-    <modules>
-        <!-- Build Core modules -->
-        <module>data-core</module>
-        <module>testmg</module>
-    </modules>
+    <dependencies>
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>6.9.6</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.1.26</version>
+        </dependency>
+        <dependency>
+            <groupId>c3p0</groupId>
+            <artifactId>c3p0</artifactId>
+            <version>0.9.1.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-entitymanager</artifactId>
+            <version>3.4.0.GA</version>
+        </dependency>
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.17</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.5</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>1.7.5</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jasypt</groupId>
+            <artifactId>jasypt</artifactId>
+            <version>1.9.2</version>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
 
+    <build>
+        <finalName>testmg</finalName>
+    </build>
 </project>
-

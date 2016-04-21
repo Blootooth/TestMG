@@ -8,9 +8,9 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 
-public class ServiceUsers {
+public class UserService {
 
-    private final Logger logger = Logger.getLogger(ServiceUsers.class);
+    private final Logger logger = Logger.getLogger(UserService.class);
 
     Users user = new Users();
 
@@ -19,7 +19,19 @@ public class ServiceUsers {
 
     // TODO - Implement methods.
 
-    public void InsertUser(String username, String password, String firstName, String lastName, String email, String roleName, String status) {
+    /**
+     * Method: createUser
+     * Usage: Create user in the database.
+     *
+     * @param username
+     * @param password
+     * @param firstName
+     * @param lastName
+     * @param email
+     * @param roleName
+     * @param status
+     */
+    public void createUser(String username, String password, String firstName, String lastName, String email, String roleName, String status) {
         logger.debug("creating user in testmg");
         try {
             user.setUsername(username);
@@ -33,12 +45,21 @@ public class ServiceUsers {
             entityManager.getTransaction().begin();
             entityManager.persist(user);
             entityManager.getTransaction().commit();
+
+            logger.info("user created with the username : " + username);
         } catch (Exception ex) {
             logger.error("user creation failed", ex.getCause());
             ex.printStackTrace();
         }
     }
 
+    /**
+     * Method: isUsernameAvailable
+     * Usage: Check if username already used in the database.
+     *
+     * @param username
+     * @return
+     */
     public Boolean isUsernameAvailable(String username) {
         try {
             if (entityManager.find(Users.class, username) != null) {
