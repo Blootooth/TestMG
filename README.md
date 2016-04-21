@@ -1,6 +1,8 @@
 # TestMG
 TestMG is an open source Test Management Platform developed in Java.
 
+[![Build Status](https://travis-ci.org/nu1silva/TestMG.svg?branch=master)](https://travis-ci.org/nu1silva/TestMG)
+
 ### Pre-requisites
 - JDK 1.8
 - Database Server (Currently supports only MySQL)
