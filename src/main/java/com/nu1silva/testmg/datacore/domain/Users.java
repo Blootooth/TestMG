@@ -13,38 +13,15 @@
  */
 package com.nu1silva.testmg.datacore.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
-@Entity
-@Table(name = "USER")
 public class Users {
 
-    @Id
-    @Column(name = "ID")
     private int userId;
-
-    @Column(name = "USERNAME")
     private String username;
-
-    @Column(name = "PASSWORD")
     private String password;
-
-    @Column(name = "FIRSTNAME")
     private String firstName;
-
-    @Column(name = "LASTNAME")
     private String lastName;
-
-    @Column(name = "EMAIL")
     private String email;
-
-    @Column(name = "ROLE")
     private String roleName;
-
-    @Column(name = "STATUS")
     private String status;
 
     public Users() {
