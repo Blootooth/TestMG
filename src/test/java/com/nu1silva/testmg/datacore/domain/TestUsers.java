@@ -5,7 +5,7 @@ import org.testng.annotations.Test;
 
 public class TestUsers {
 
-    Users users = new Users(100, "user1", "password", "fname", "lname", "mail@example.com", "role1", "ACTIVE");
+    UserAccounts users = new UserAccounts(100, "user1@example.com", "password", "fname", "lname", "ACTIVE");
 
     @Test
     public void testUserId() {
@@ -13,8 +13,8 @@ public class TestUsers {
     }
 
     @Test
-    public void testUsername() {
-        Assert.assertEquals("user1", users.getUsername(), "username mismatch");
+    public void testEmail() {
+        Assert.assertEquals("user1@example.com", users.getEmail(), "email mismatch");
     }
 
     @Test
@@ -30,16 +30,6 @@ public class TestUsers {
     @Test
     public void testLastName() {
         Assert.assertEquals("lname", users.getLastName(), "last name mismatch");
-    }
-
-    @Test
-    public void testEmail() {
-        Assert.assertEquals("mail@example.com", users.getEmail(), "email mismatch");
-    }
-
-    @Test
-    public void testRoles() {
-        Assert.assertEquals("role1", users.getRoleName(), "role mismatch");
     }
 
     @Test
