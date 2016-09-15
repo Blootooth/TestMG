@@ -24,7 +24,7 @@ public class TestUserAccountService {
     /**
      * Highly dependent on database hence will be removed.
      */
-    @Test
+    @Test(enabled = false)
     public void testGetUserFromID() {
         UserAccountService userAccountService = new UserAccountService();
         userAccount = userAccountService.getUser(1);
