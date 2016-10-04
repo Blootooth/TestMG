@@ -13,22 +13,44 @@
  */
 package com.nu1silva.testmg.datacore.services;
 
-import com.nu1silva.testmg.datacore.domain.UserAccounts;
-import org.testng.Assert;
-import org.testng.annotations.Test;
+/**
+ * These test will be removed. Why?
+ * <p/>
+ * These are not unit tests.
+ */
+
 
 public class TestUserAccountService {
 
-    UserAccounts userAccount;
-
-    /**
-     * Highly dependent on database hence will be removed.
-     */
-    @Test(enabled = false)
-    public void testGetUserFromID() {
-        UserAccountService userAccountService = new UserAccountService();
-        userAccount = userAccountService.getUser(1);
-        Assert.assertEquals(1, userAccount.getUserId(), "User ID mismatch");
-        Assert.assertEquals("nu1silva@gmail.com", userAccount.getEmail(), "User email mismatch");
-    }
+//    UserAccounts userAccount;
+//    UserAccountService userAccountService = new UserAccountService();
+//
+//    @Test(enabled = false)
+//    public void testInsertOrUpdateUser() {
+//        UserAccounts userAccount = new UserAccounts();
+//        userAccount.setEmail("test1@test.com");
+//        userAccount.setFirstName("test1");
+//        userAccount.setLastName("test2");
+//        userAccount.setPassword("testpassword");
+//        userAccount.setStatus("ACTIVE");
+//
+//        userAccountService.InsertOrUpdateUser(userAccount);
+//    }
+//
+//    /**
+//     * Highly dependent on database hence disabled.
+//     */
+//    @Test(enabled = false)
+//    public void testGetUserFromID() {
+//        userAccount = userAccountService.getUserByID(1);
+//        Assert.assertEquals(1, userAccount.getUserId(), "User ID mismatch");
+//        Assert.assertEquals("nu1silva@gmail.com", userAccount.getEmail(), "User email mismatch");
+//    }
+//
+//    @Test(enabled = false)
+//    public void testGetUserFromEmail() {
+//        userAccount = userAccountService.getUserByEmail("nu1silva@gmail.com");
+//        Assert.assertEquals(1, userAccount.getUserId(), "User ID mismatch");
+//        Assert.assertEquals("nu1silva@gmail.com", userAccount.getEmail(), "User email mismatch");
+//    }
 }

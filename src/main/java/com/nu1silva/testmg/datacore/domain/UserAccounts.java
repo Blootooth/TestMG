@@ -19,6 +19,8 @@ import javax.persistence.*;
  * The Users domain class for database mapping
  *
  * @author Nuwan Silva (nu1silva@gmail.com)
+ * @version 1.0.0
+ * @since 2016-09-20
  */
 
 @Entity
