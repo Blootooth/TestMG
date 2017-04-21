@@ -16,12 +16,14 @@ package com.nu1silva.testmg.datacore.services;
 
 import com.nu1silva.testmg.datacore.domain.UserAccounts;
 import com.nu1silva.testmg.datacore.exceptions.UserAccountServiceException;
-import org.jasypt.util.password.StrongPasswordEncryptor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
+import java.util.Collection;
 
 /**
  * UserAccountService Class that contains the User Management functionality with the database
@@ -32,12 +34,12 @@ import javax.persistence.Query;
  */
 public class UserAccountService {
 
-    EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("testmg");
-    EntityManager entityManager = entityManagerFactory.createEntityManager();
+    private final Logger logger = LoggerFactory.getLogger(UserAccountService.class);
 
-    StrongPasswordEncryptor strongPasswordEncryptor = new StrongPasswordEncryptor();
+    private EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("testmg");
+    private EntityManager entityManager = entityManagerFactory.createEntityManager();
 
-    UserAccounts userAccount;
+    private UserAccounts userAccount;
 
     /**
      * Insert or update a user in the platform
@@ -45,24 +47,23 @@ public class UserAccountService {
      * @param user
      */
     public void InsertOrUpdateUser(UserAccounts user) {
+        if (logger.isDebugEnabled()) {
+            logger.debug("creating/updating account for user {}", user.getEmail());
+            logger.debug("user account {");
+            logger.debug("  ID : {}", user.getUserId());
+            logger.debug("  email : {}", user.getEmail());
+            logger.debug("  first name : {}", user.getFirstName());
+            logger.debug("  last name  : {}", user.getLastName());
+            logger.debug("  status : {}", user.getStatus());
+            logger.debug("}");
+        }
         try {
-            if (!isUserAvailable(user.getEmail())) {
-
-                UserAccounts newUserAccount = new UserAccounts();
-                newUserAccount.setEmail(user.getEmail());
-                newUserAccount.setFirstName(user.getFirstName());
-                newUserAccount.setLastName(user.getLastName());
-                newUserAccount.setPassword(strongPasswordEncryptor.encryptPassword(user.getPassword()));
-                newUserAccount.setStatus(user.getStatus());
-
-                entityManager.getTransaction().begin();
-                entityManager.persist(newUserAccount);
-                entityManager.getTransaction().commit();
-            } else {
-                new UserAccountServiceException("user email already available in the platform");
-            }
+            entityManager.getTransaction().begin();
+            entityManager.persist(user);
+            entityManager.getTransaction().commit();
         } catch (Exception ex) {
-            ex.printStackTrace();
+            logger.error("error while creating/updating account for []", user.getEmail(),
+                    new UserAccountServiceException("error while creating/updating account", ex));
         }
     }
 
@@ -72,17 +73,54 @@ public class UserAccountService {
      * @param email
      */
     public void removeUser(String email) {
+        String deleteStatus = "DELETED";
+
+        logger.info("removing user account {}", email);
+        if (logger.isDebugEnabled()) {
+            logger.debug("NOTE: As a special requirement when removing an account, the said account will be moved into" +
+                    "a DELETED state.");
+        }
+
         try {
             if (isUserAvailable(email)) {
-                userAccount = entityManager.find(UserAccounts.class, email);
-                entityManager.getTransaction().begin();
-                entityManager.remove(userAccount);
-                entityManager.getTransaction().commit();
+                userAccount = getUserByEmail(email);
+                updateUserStatus(email, deleteStatus);
+
+                logger.info("successfully removed the user account");
+
+                // entityManager.remove() not used.
+                //entityManager.getTransaction().begin();
+                //entityManager.remove(userAccount);
+                //entityManager.getTransaction().commit();
             } else {
-                new UserAccountServiceException("User not found within the system");
+                logger.error("set email {} not associated with any account", email,
+                        new UserAccountServiceException("User not found within the system"));
             }
         } catch (Exception ex) {
-            ex.printStackTrace();
+            logger.error("error occurred while removing user", new UserAccountServiceException(ex));
+        }
+    }
+
+    /**
+     * Update state of any account
+     *
+     * @param email
+     * @param status
+     */
+    public void updateUserStatus(String email, String status) {
+        String currentState = null;
+        try {
+            userAccount = getUserByEmail(email);
+            userAccount.setStatus(status);
+            entityManager.getTransaction().begin();
+            entityManager.persist(userAccount);
+            entityManager.getTransaction().commit();
+
+            if (logger.isDebugEnabled()) {
+                logger.debug("status changed for user [{}] {} -> {}", email, currentState, status);
+            }
+        } catch (Exception ex) {
+            logger.error("error occurred while changing status of a user", new UserAccountServiceException(ex));
         }
     }
 
@@ -97,7 +135,7 @@ public class UserAccountService {
         try {
             userAccount = entityManager.find(UserAccounts.class, userId);
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("error occurred while getting user by ID", new UserAccountServiceException(e));
         }
         return userAccount;
     }
@@ -115,12 +153,21 @@ public class UserAccountService {
             userAccount = (UserAccounts) getUserByEmailQuery.getSingleResult();
 
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("error occurred while getting user by email", new UserAccountServiceException(e));
         }
         return userAccount;
     }
 
-//    List<UserAccounts> list();
+    /**
+     * Get all user accounts available in the database
+     *
+     * @return List of UserAccounts
+     */
+    public Collection<UserAccounts> getAllUserAccounts() {
+        logger.info("retrieve all accounts");
+        Query getAllQuery = entityManager.createQuery("SELECT u FROM UserAccounts u");
+        return getAllQuery.getResultList();
+    }
 
     /**
      * Check if the email is already available in the system
@@ -133,11 +180,11 @@ public class UserAccountService {
         try {
             Query isUserAvailableQuery = entityManager.createQuery("SELECT count(*) FROM UserAccounts u WHERE u.email = '" + email + "'");
             if (Integer.parseInt(isUserAvailableQuery.getSingleResult().toString()) >= 1)
-                result = false;
-            else
                 result = true;
+            else
+                result = false;
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("error occurred while checking user availability", new UserAccountServiceException(e));
         }
         return result;
     }

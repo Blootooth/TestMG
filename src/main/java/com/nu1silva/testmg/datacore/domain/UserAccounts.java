@@ -54,6 +54,11 @@ public class UserAccounts {
         this.status = status;
     }
 
+    public UserAccounts(String email, String status) {
+        this.email = email;
+        this.status = status;
+    }
+
     public int getUserId() {
         return userId;
     }
@@ -100,5 +105,13 @@ public class UserAccounts {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String toString() {
+        return "{" + this.userId + "," +
+                this.email + "," +
+                this.firstName + "," +
+                this.lastName + "," +
+                this.status + "}";
     }
 }

@@ -13,22 +13,28 @@
  */
 package com.nu1silva.testmg.util;
 
+import org.jasypt.util.password.ConfigurablePasswordEncryptor;
+
 public class PasswordUtils {
-//
-//    ConfigurablePasswordEncryptor passwordEncryptor = new ConfigurablePasswordEncryptor();
-//
-//    UserService userService = new UserService();
-//
-//    public String encryptPassword(String password) {
-//        try {
-//            passwordEncryptor.setAlgorithm("SHA-1");
-//            passwordEncryptor.setPlainDigest(true);
-//            return passwordEncryptor.encryptPassword(password);
-//        } catch (Exception ex) {
-//            ex.printStackTrace();
-//            return null;
-//        }
-//    }
+
+    private ConfigurablePasswordEncryptor passwordEncryptor = new ConfigurablePasswordEncryptor();
+
+    /**
+     * Main password encryption method.
+     *
+     * @param password password that will be encrypted
+     * @return encrypted password
+     */
+    public String encryptPassword(String password) {
+        try {
+            passwordEncryptor.setAlgorithm("SHA-1");
+            passwordEncryptor.setPlainDigest(true);
+            return passwordEncryptor.encryptPassword(password);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return null;
+        }
+    }
 //
 //    public Boolean passwordVerification(String username, String password) {
 //        try {
