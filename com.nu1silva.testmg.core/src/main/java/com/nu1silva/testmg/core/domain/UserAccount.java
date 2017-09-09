@@ -11,9 +11,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.nu1silva.testmg.core.datacore.domain;
-
-import javax.persistence.*;
+package com.nu1silva.testmg.core.domain;
 
 /**
  * The Users domain class for database mapping
@@ -23,29 +21,19 @@ import javax.persistence.*;
  * @since 2016-09-20
  */
 
-@Entity
-@Table(name = "USER_ACCOUNTS")
-public class UserAccounts {
+public class UserAccount {
 
-    @Id
-    @GeneratedValue
-    @Column(name = "ID")
     private int userId;
-    @Column(name = "EMAIL")
     private String email;
-    @Column(name = "PASSWORD")
     private String password;
-    @Column(name = "FIRSTNAME")
     private String firstName;
-    @Column(name = "LASTNAME")
     private String lastName;
-    @Column(name = "STATUS")
     private String status;
 
-    public UserAccounts() {
+    public UserAccount() {
     }
 
-    public UserAccounts(int userId, String email, String password, String firstName, String lastName, String status) {
+    public UserAccount(int userId, String email, String password, String firstName, String lastName, String status) {
         this.userId = userId;
         this.email = email;
         this.password = password;
@@ -54,7 +42,7 @@ public class UserAccounts {
         this.status = status;
     }
 
-    public UserAccounts(String email, String status) {
+    public UserAccount(String email, String status) {
         this.email = email;
         this.status = status;
     }

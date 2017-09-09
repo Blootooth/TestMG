@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-package com.nu1silva.testmg.core.datacore.domain;
+package com.nu1silva.testmg.core.domain;
 
 public class TestCase {
 

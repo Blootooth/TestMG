@@ -11,7 +11,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.nu1silva.testmg.core.datacore.domain;
+package com.nu1silva.testmg.core.domain;
 
 public class TestSteps {
 

@@ -12,10 +12,10 @@
  * limitations under the License.
  */
 
-package com.nu1silva.testmg.core.datacore.service;
+package com.nu1silva.testmg.core.service;
 
-import com.nu1silva.testmg.core.datacore.domain.UserAccounts;
-import com.nu1silva.testmg.core.datacore.exception.UserAccountServiceException;
+import com.nu1silva.testmg.core.domain.UserAccount;
+import com.nu1silva.testmg.core.exception.UserAccountServiceException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -39,14 +39,14 @@ public class UserAccountService {
     private EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("testmg");
     private EntityManager entityManager = entityManagerFactory.createEntityManager();
 
-    private UserAccounts userAccount;
+    private UserAccount userAccount;
 
     /**
      * Insert or update a user in the platform
      *
      * @param user
      */
-    public void InsertOrUpdateUser(UserAccounts user) {
+    public void InsertOrUpdateUser(UserAccount user) {
         if (logger.isDebugEnabled()) {
             logger.debug("creating/updating account for user {}", user.getEmail());
             logger.debug("user account {");
@@ -128,12 +128,12 @@ public class UserAccountService {
      * Get User Account by ID
      *
      * @param userId
-     * @return UserAccounts
+     * @return UserAccount
      */
-    public UserAccounts getUserByID(int userId) {
-        UserAccounts userAccount = null;
+    public UserAccount getUserByID(int userId) {
+        UserAccount userAccount = null;
         try {
-            userAccount = entityManager.find(UserAccounts.class, userId);
+            userAccount = entityManager.find(UserAccount.class, userId);
         } catch (Exception e) {
             logger.error("error occurred while getting user by ID", new UserAccountServiceException(e));
         }
@@ -144,13 +144,13 @@ public class UserAccountService {
      * Get User Account by Email
      *
      * @param email
-     * @return UserAccounts
+     * @return UserAccount
      */
-    public UserAccounts getUserByEmail(String email) {
-        UserAccounts userAccount = null;
+    public UserAccount getUserByEmail(String email) {
+        UserAccount userAccount = null;
         try {
-            Query getUserByEmailQuery = entityManager.createQuery("SELECT u FROM UserAccounts u WHERE u.email = '" + email + "'");
-            userAccount = (UserAccounts) getUserByEmailQuery.getSingleResult();
+            Query getUserByEmailQuery = entityManager.createQuery("SELECT u FROM UserAccount u WHERE u.email = '" + email + "'");
+            userAccount = (UserAccount) getUserByEmailQuery.getSingleResult();
 
         } catch (Exception e) {
             logger.error("error occurred while getting user by email", new UserAccountServiceException(e));
@@ -161,11 +161,11 @@ public class UserAccountService {
     /**
      * Get all user accounts available in the database
      *
-     * @return List of UserAccounts
+     * @return List of UserAccount
      */
-    public Collection<UserAccounts> getAllUserAccounts() {
+    public Collection<UserAccount> getAllUserAccounts() {
         logger.info("retrieve all accounts");
-        Query getAllQuery = entityManager.createQuery("SELECT u FROM UserAccounts u");
+        Query getAllQuery = entityManager.createQuery("SELECT u FROM UserAccount u");
         return getAllQuery.getResultList();
     }
 
@@ -178,7 +178,7 @@ public class UserAccountService {
     private Boolean isUserAvailable(String email) {
         Boolean result = false;
         try {
-            Query isUserAvailableQuery = entityManager.createQuery("SELECT count(*) FROM UserAccounts u WHERE u.email = '" + email + "'");
+            Query isUserAvailableQuery = entityManager.createQuery("SELECT count(*) FROM UserAccount u WHERE u.email = '" + email + "'");
             if (Integer.parseInt(isUserAvailableQuery.getSingleResult().toString()) >= 1)
                 result = true;
             else
