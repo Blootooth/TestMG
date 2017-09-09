@@ -1,22 +1,15 @@
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <parent>
         <artifactId>TestMG</artifactId>
         <groupId>com.nu1silva.testmg</groupId>
         <version>0.0.1</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-
-    <artifactId>com.nu1silva.testmg.core</artifactId>
-    <packaging>jar</packaging>
-
-    <name>com.nu1silva.testmg.core</name>
+    <artifactId>testmg</artifactId>
+    <packaging>war</packaging>
+    <name>com.nu1silva.testmg.application</name>
     <url>http://maven.apache.org</url>
-
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
-
     <dependencies>
         <dependency>
             <groupId>junit</groupId>
@@ -25,4 +18,7 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
+    <build>
+        <finalName>com.nu1silva.testmg.application</finalName>
+    </build>
 </project>

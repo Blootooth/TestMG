@@ -7,10 +7,10 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>com.nu1silva.testmg.core</artifactId>
+    <artifactId>com.nu1silva.testmg.util</artifactId>
     <packaging>jar</packaging>
 
-    <name>com.nu1silva.testmg.core</name>
+    <name>com.nu1silva.testmg.util</name>
     <url>http://maven.apache.org</url>
 
     <properties>
