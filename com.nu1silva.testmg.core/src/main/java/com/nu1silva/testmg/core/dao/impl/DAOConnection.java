@@ -13,27 +13,20 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-package com.nu1silva.testmg.core.dao;
 
-import com.nu1silva.testmg.core.domain.UserAccount;
+package com.nu1silva.testmg.core.dao.impl;
 
-import java.util.Collection;
+import java.sql.Connection;
+import java.sql.SQLException;
 
-public interface UserAccountDAO {
+public class DAOConnection {
 
-    Boolean isUserAccountActive(String id);
+    public static Datasource datasource;
 
-    Boolean isUserAccountAvailable(String id);
-
-    UserAccount getUserAccountFromId(String id);
-
-    UserAccount getUserAccountFromEmail(String email);
-
-    void createUserAccount(UserAccount userAccount);
-
-    void updateUserAccount(UserAccount userAccount);
-
-    void removeUserAccount(String id);
-
-    Collection<UserAccount> getAllUserAccounts();
+    static Connection getConnection() throws SQLException {
+        if (datasource != null) {
+            return datasource.getConnection();
+        }
+        throw new SQLException("Datasource is not configured properly!!!");
+    }
 }

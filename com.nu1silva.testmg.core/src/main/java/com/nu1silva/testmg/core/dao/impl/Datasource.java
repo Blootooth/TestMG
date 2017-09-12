@@ -13,27 +13,16 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-package com.nu1silva.testmg.core.dao;
 
-import com.nu1silva.testmg.core.domain.UserAccount;
+package com.nu1silva.testmg.core.dao.impl;
 
-import java.util.Collection;
+import com.zaxxer.hikari.HikariDataSource;
 
-public interface UserAccountDAO {
+import java.sql.Connection;
 
-    Boolean isUserAccountActive(String id);
+public interface Datasource {
 
-    Boolean isUserAccountAvailable(String id);
+    Connection getConnection();
 
-    UserAccount getUserAccountFromId(String id);
-
-    UserAccount getUserAccountFromEmail(String email);
-
-    void createUserAccount(UserAccount userAccount);
-
-    void updateUserAccount(UserAccount userAccount);
-
-    void removeUserAccount(String id);
-
-    Collection<UserAccount> getAllUserAccounts();
+    HikariDataSource getDatasource();
 }
