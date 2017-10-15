@@ -17,11 +17,12 @@ package com.nu1silva.testmg.core.dao;
 
 import com.nu1silva.testmg.core.domain.UserAccount;
 
+import java.sql.SQLException;
 import java.util.Collection;
 
 public interface UserAccountDAO {
 
-    Boolean isUserAccountActive(String id);
+    Boolean isUserAccountActive(String id) throws SQLException;
 
     Boolean isUserAccountAvailable(String id);
 
