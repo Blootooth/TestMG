@@ -14,15 +14,20 @@
  *  limitations under the License.
  */
 
-package com.nu1silva.testmg.core.dao.impl;
+package com.nu1silva.testmg.core;
 
-import com.zaxxer.hikari.HikariDataSource;
+import com.nu1silva.testmg.core.dao.impl.UserAccountDAOImpl;
 
-import java.sql.Connection;
+import java.sql.SQLException;
 
-public interface Datasource {
+public class main {
 
-    Connection getConnection();
-
-    HikariDataSource getDatasource();
+    public static void main(String args[]) throws SQLException {
+        UserAccountDAOImpl userAccountDAO = new UserAccountDAOImpl();
+        if (userAccountDAO.isUserAccountActive("123")) {
+            System.out.println("Hakuna Matata");
+        } else {
+            System.out.println("Didnt work bro :(");
+        }
+    }
 }
