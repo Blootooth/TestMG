@@ -1,3 +1,5 @@
+# Major Refactoring on-going
+
 # TestMG
 TestMG is an open source Test Management Platform developed in Java.
 

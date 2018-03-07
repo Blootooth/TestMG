@@ -4,9 +4,8 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>TestMG</artifactId>
     <modules>
-        <module>com.nu1silva.testmg.core</module>
-        <module>com.nu1silva.testmg.util</module>
-        <module>com.nu1silva.testmg.application</module>
+        <module>modules/com.nu1silva.testmg.core</module>
+        <module>modules/com.nu1silva.testmg.util</module>
     </modules>
     <groupId>com.nu1silva.testmg</groupId>
     <version>0.0.1</version>
